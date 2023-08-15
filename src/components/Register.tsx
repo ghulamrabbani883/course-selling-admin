@@ -43,6 +43,9 @@ const Register = () => {
       alert(res.data.msg);
       navigate("/courses");
     } else {
+      setUser((prev)=>{
+        return {...prev, isAuthenticated:false, isUserLoading:false}
+      })
       alert(res.data.msg);
     }
     setUserData({ name: "", email:"", password: "" });

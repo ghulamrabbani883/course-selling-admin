@@ -42,7 +42,11 @@ const Login = () => {
       alert(res.data.msg);
       navigate("/courses");
     } else {
+      setUser((prev)=>{
+        return {...prev, isAuthenticated:false, isUserLoading:false}
+      })
       alert(res.data.msg);
+      
     }
     setLoginData((prev) => {
       return { ...prev, email: "", password: "" };
