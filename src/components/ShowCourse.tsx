@@ -36,7 +36,7 @@ const ShowCourse = () => {
       })
       alert("row deleted" + JSON.stringify(res.data.deletedRows));
     }
-    // window.location.reload();
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -141,14 +141,15 @@ const ShowCourse = () => {
                             justifyContent: "space-between",
                           }}
                         >
+                          <Link to={`/courses/${course.courseid}`}>
                           <Button
                             size="small"
                             variant="contained"
                             color="success"
-                            href={`/courses/${course.courseid}`}
                           >
                             Update
                           </Button>
+                          </Link>
                           <Button
                             size="small"
                             variant="contained"
