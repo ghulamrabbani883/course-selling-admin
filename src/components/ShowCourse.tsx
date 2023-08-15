@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL, CourseType, courseState, parseToken, userState } from "../state/atoms/adminatom";
 import { useRecoilState, useRecoilValue } from "recoil";
 import Loader from "./Loader";
@@ -20,23 +20,24 @@ import Loader from "./Loader";
 const ShowCourse = () => {
   const [{allCourse, isCourseLoading}, setCourseData] = useRecoilState(courseState);
   const {isUserLoading} = useRecoilValue(userState)
-  console.log(isCourseLoading, isUserLoading)
+  const navigate = useNavigate()  
 
   const token = parseToken();
 
   const deleteCourse = async (courseId: number) => {
+    
+    axios.defaults.headers.common["bearertoken"] = token;
     setCourseData((prev)=>{
       return {...prev, isCourseLoading:true}
     })
-    axios.defaults.headers.common["bearertoken"] = token;
     const res = await axios.delete(BASE_URL + `/courses/${courseId}`);
+    setCourseData((prev)=>{
+      return {...prev, isCourseLoading:false}
+    })
     if (res.data.msg !== "") {
-      setCourseData((prev)=>{
-        return {...prev, isCourseLoading:false}
-      })
       alert("row deleted" + JSON.stringify(res.data.deletedRows));
     }
-    window.location.reload();
+    navigate('/courses')
   };
 
   useEffect(() => {
