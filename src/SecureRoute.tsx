@@ -10,7 +10,7 @@ const SecureRoute = (props: LayoutProps) => {
   const token = parseToken();
   console.log(token)
   const location = useLocation();
-  if (token === 'undefined' || token === 'null') {
+  if (token === 'undefined' || token === 'null' || !token) {
     return <Navigate to="/login" state={{ from: location }} replace />;
   }
   return <>{props.children}</>;
