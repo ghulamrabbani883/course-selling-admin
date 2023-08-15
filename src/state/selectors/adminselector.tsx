@@ -1,5 +1,5 @@
 import { selector } from "recoil";
-import { courseState, parseToken, userState } from "../atoms/adminatom";
+import { courseState, userState } from "../atoms/adminatom";
 
 
 export const isCourseLoading = selector({
