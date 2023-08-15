@@ -24,8 +24,7 @@ const ShowCourse = () => {
 
   const token = parseToken();
 
-  const deleteCourse = async (courseId: number) => {
-    
+  const deleteCourse = async (courseId: number) => { 
     axios.defaults.headers.common["bearertoken"] = token;
     setCourseData((prev)=>{
       return {...prev, isCourseLoading:true}
@@ -37,7 +36,7 @@ const ShowCourse = () => {
     if (res.data.msg !== "") {
       alert("row deleted" + JSON.stringify(res.data.deletedRows));
     }
-    navigate('/courses')
+    window.location.reload();
   };
 
   useEffect(() => {
@@ -56,6 +55,7 @@ const ShowCourse = () => {
       })
     };
     fetchCourses();
+
   }, []);
 
   if(isUserLoading || isCourseLoading){
